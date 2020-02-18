@@ -1,13 +1,13 @@
--- ÇÁ·Î½ÃÀú(PROCEDURE) : PL/SQL¹®À» ÀúÀåÇÏ´Â °´Ã¼
--- Æ¯Á¤ ·ÎÁ÷À» Ã³¸®ÇÏ±â¸¸ ÇÏ°í °á°ú °ªÀ» ¹ÝÈ¯ÇÏÁö´Â ¾ÊÀ½
+-- í”„ë¡œì‹œì €(PROCEDURE) : PL/SQLë¬¸ì„ ì €ìž¥í•˜ëŠ” ê°ì²´
+-- íŠ¹ì • ë¡œì§ì„ ì²˜ë¦¬í•˜ê¸°ë§Œ í•˜ê³  ê²°ê³¼ ê°’ì„ ë°˜í™˜í•˜ì§€ëŠ” ì•ŠìŒ
 
--- EMPLOYEEÅ×ÀÌºíÀ» º¹»çÇÑ EMP_DUPÅ×ÀÌºí »ý¼º
+-- EMPLOYEEí…Œì´ë¸”ì„ ë³µì‚¬í•œ EMP_DUPí…Œì´ë¸” ìƒì„±
 CREATE TABLE EMP_DUP
 AS SELECT * FROM EMPLOYEE;
 
 SELECT * FROM EMP_DUP;
 
--- È£Ãâ ½Ã EMP_DUPÅ×ÀÌºí¿¡ ÀÖ´Â ¸ðµç µ¥ÀÌÅÍ¸¦ »èÁ¦ÇÏ´Â DEL_ALL_EMPÇÁ·Î½ÃÀú »ý¼º
+-- í˜¸ì¶œ ì‹œ EMP_DUPí…Œì´ë¸”ì— ìžˆëŠ” ëª¨ë“  ë°ì´í„°ë¥¼ ì‚­ì œí•˜ëŠ” DEL_ALL_EMPí”„ë¡œì‹œì € ìƒì„±
 CREATE OR REPLACE PROCEDURE DEL_ALL_EMP
 IS
 BEGIN
@@ -15,22 +15,22 @@ BEGIN
     COMMIT;
 END;
 /
--- Procedure DEL_ALL_EMPÀÌ(°¡) ÄÄÆÄÀÏµÇ¾ú½À´Ï´Ù.
+-- Procedure DEL_ALL_EMPì´(ê°€) ì»´íŒŒì¼ë˜ì—ˆìŠµë‹ˆë‹¤.
 
 SELECT * FROM EMP_DUP;
--- ¸¸µé¾î ÁÖ±â¸¸ ÇÏ°í È£Ãâ ÇÏÁö ¾Ê¾Æ¼­ ½ÇÇàµÇÁö ¾Ê¾ÒÀ½
+-- ë§Œë“¤ì–´ ì£¼ê¸°ë§Œ í•˜ê³  í˜¸ì¶œ í•˜ì§€ ì•Šì•„ì„œ ì‹¤í–‰ë˜ì§€ ì•Šì•˜ìŒ
 
 EXECUTE DEL_ALL_EMP;
--- PL/SQL ÇÁ·Î½ÃÀú°¡ ¼º°øÀûÀ¸·Î ¿Ï·áµÇ¾ú½À´Ï´Ù.
+-- PL/SQL í”„ë¡œì‹œì €ê°€ ì„±ê³µì ìœ¼ë¡œ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.
 
 SELECT * FROM EMP_DUP;
 
 SELECT * FROM USER_SOURCE;
--- ÇÁ·Î½ÃÀú °ü¸®¿ë DD(DATA DICTIONARY)
+-- í”„ë¡œì‹œì € ê´€ë¦¬ìš© DD(DATA DICTIONARY)
 
 COMMIT;
 
--- V_EMP_ID ¸Å°³º¯¼ö°¡ ÀÖ´Â ÇÁ·Î½ÃÀú
+-- V_EMP_ID ë§¤ê°œë³€ìˆ˜ê°€ ìžˆëŠ” í”„ë¡œì‹œì €
 CREATE OR REPLACE PROCEDURE DEL_EMP_ID(V_EMP_ID EMPLOYEE.EMP_ID%TYPE)
 IS
 BEGIN
@@ -39,17 +39,17 @@ BEGIN
 END;
 /
 
-EXEC DEL_EMP_ID('&»ç¹ø');
+EXEC DEL_EMP_ID('&ì‚¬ë²ˆ');
 
 SELECT * FROM EMPLOYEE;
 
 ROLLBACK;
 
--- IN/OUT ¸Å°³º¯¼ö ÀÖ´Â ÇÁ·Î½ÃÀú
--- IN ¸Å°³º¯¼ö : ÇÁ·Î½ÃÀú ³»ºÎ¿¡¼­ »ç¿ëµÉ º¯¼ö
--- OUT ¸Å°³º¯¼ö : ÇÁ·Î½ÃÀú ¿ÜºÎ(È£ÃâºÎ)¿¡¼­ »ç¿ëµÉ º¯¼ö
+-- IN/OUT ë§¤ê°œë³€ìˆ˜ ìžˆëŠ” í”„ë¡œì‹œì €
+-- IN ë§¤ê°œë³€ìˆ˜ : í”„ë¡œì‹œì € ë‚´ë¶€ì—ì„œ ì‚¬ìš©ë  ë³€ìˆ˜
+-- OUT ë§¤ê°œë³€ìˆ˜ : í”„ë¡œì‹œì € ì™¸ë¶€(í˜¸ì¶œë¶€)ì—ì„œ ì‚¬ìš©ë  ë³€ìˆ˜
 
--- »ç¿ëÀÚ°¡ ÀÔ·ÂÇÑ »ç¹øÀ¸·Î »ç¿øÀÇ ÀÌ¸§, ±Þ¿©, º¸³Ê½º Á¶È¸ÇÏ´Â SELECT_EMP_ID ÇÁ·Î½ÃÀú »ý¼º
+-- ì‚¬ìš©ìžê°€ ìž…ë ¥í•œ ì‚¬ë²ˆìœ¼ë¡œ ì‚¬ì›ì˜ ì´ë¦„, ê¸‰ì—¬, ë³´ë„ˆìŠ¤ ì¡°íšŒí•˜ëŠ” SELECT_EMP_ID í”„ë¡œì‹œì € ìƒì„±
 CREATE OR REPLACE PROCEDURE SELECT_EMP_ID(
     V_EMP_ID IN EMPLOYEE.EMP_ID%TYPE,
     V_EMP_NAME OUT EMPLOYEE.EMP_NAME%TYPE,
@@ -65,9 +65,9 @@ BEGIN
 END;
 /
 
--- ¹ÙÀÎµå º¯¼ö(VARIABLE OR VAR)
--- SQL¹®À» ½ÇÇàÇÒ ¶§ SQL¿¡ »ç¿ë °ªÀ» Àü´ÞÇÒ ¼ö ÀÖ´Â Åë·Î ¿ªÇÒ
--- ÇÁ·Î½ÃÀú¿¡¼­ Á¤ÇÑ ¸Å°³º¯¼ö¿Í ¹Û¿¡¼­ »ç¿ëÇÒ ¸Å°³º¯¼ö¸¦ ¿¬°áÇÏ´Â ¿ªÇÒ
+-- ë°”ì¸ë“œ ë³€ìˆ˜(VARIABLE OR VAR)
+-- SQLë¬¸ì„ ì‹¤í–‰í•  ë•Œ SQLì— ì‚¬ìš© ê°’ì„ ì „ë‹¬í•  ìˆ˜ ìžˆëŠ” í†µë¡œ ì—­í• 
+-- í”„ë¡œì‹œì €ì—ì„œ ì •í•œ ë§¤ê°œë³€ìˆ˜ì™€ ë°–ì—ì„œ ì‚¬ìš©í•  ë§¤ê°œë³€ìˆ˜ë¥¼ ì—°ê²°í•˜ëŠ” ì—­í• 
 VARIABLE VAR_EMP_NAME VARCHAR2(30);
 VAR VAR_SALARY NUMBER;
 VAR VAR_BONUS NUMBER;
@@ -76,26 +76,26 @@ PRINT VAR_EMP_NAME;
 PRINT VAR_SALARY;
 PRINT VAR_BONUS;
 
-EXEC SELECT_EMP_ID('&»ç¹ø', :VAR_EMP_NAME, :VAR_SALARY, :VAR_BONUS);
+EXEC SELECT_EMP_ID('&ì‚¬ë²ˆ', :VAR_EMP_NAME, :VAR_SALARY, :VAR_BONUS);
 
 SET AUTOPRINT ON;
 
--- FUNCTION : ÇÁ·Î½ÃÀú¿Í »ç¿ë ¿ëµµ´Â °ÅÀÇ ºñ½ÁÇÏÁö¸¸ ½ÇÇà°á°ú¸¦ µÇµ¹·Á¹ÞÀ¸ ¼ö ÀÖÀ½(RETURN)
+-- FUNCTION : í”„ë¡œì‹œì €ì™€ ì‚¬ìš© ìš©ë„ëŠ” ê±°ì˜ ë¹„ìŠ·í•˜ì§€ë§Œ ì‹¤í–‰ê²°ê³¼ë¥¼ ë˜ëŒë ¤ë°›ì„ ìˆ˜ ìžˆìŒ(RETURN)
 /*
-    CREATE OR REPLACE FUNCTION ÇÔ¼ö¸í (¸Å°³º¯¼ö1 ¸Å°³¹ø¼öÅ¸ÀÔ, .....)
-    RETURN µ¥ÀÌÅÍÅ¸ÀÔ
+    CREATE OR REPLACE FUNCTION í•¨ìˆ˜ëª… (ë§¤ê°œë³€ìˆ˜1 ë§¤ê°œë²ˆìˆ˜íƒ€ìž…, .....)
+    RETURN ë°ì´í„°íƒ€ìž…
     IS [AS]
-        ¼±¾ðºÎ
+        ì„ ì–¸ë¶€
     BEGIN
-        ½ÇÇàºÎ
-        RETURN ¹ÝÈ¯°ª;
+        ì‹¤í–‰ë¶€
+        RETURN ë°˜í™˜ê°’;
     [EXCEPTION 
-        ¿¹¿ÜÃ³¸®ºÎ]
-    END [ÇÔ¼ö¸í];
+        ì˜ˆì™¸ì²˜ë¦¬ë¶€]
+    END [í•¨ìˆ˜ëª…];
     /
 */
 
--- »ç¹øÀ» ÀÔ·Â¹Þ¾Æ ÇØ´ç »ç¿øÀÇ ¿¬ºÀÀ» °è»êÇÏ°í ¸®ÅÏÇÏ´Â ÇÔ¼ö »ý¼º (BONUS_CALC)
+-- ì‚¬ë²ˆì„ ìž…ë ¥ë°›ì•„ í•´ë‹¹ ì‚¬ì›ì˜ ì—°ë´‰ì„ ê³„ì‚°í•˜ê³  ë¦¬í„´í•˜ëŠ” í•¨ìˆ˜ ìƒì„± (BONUS_CALC)
 CREATE OR REPLACE FUNCTION BONUS_CALC(V_EMP_ID EMPLOYEE.EMP_ID%TYPE)
 RETURN NUMBER
 IS
@@ -116,4 +116,4 @@ END;
 
 VAR VAR_CALC NUMBER;
 
-EXEC :VAR_CALC := BONUS_CALC('&»ç¹ø');
+EXEC :VAR_CALC := BONUS_CALC('&ì‚¬ë²ˆ');
